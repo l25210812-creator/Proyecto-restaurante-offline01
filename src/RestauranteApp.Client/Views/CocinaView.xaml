@@ -1,0 +1,60 @@
+<UserControl x:Class="RestauranteApp.Client.Views.CocinaView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <DockPanel Background="#FF1C1C1C">
+        <Grid DockPanel.Dock="Top" Background="#FF34495E" Height="60">
+            <TextBlock Text="{Binding TituloEstacion}" Foreground="White" FontSize="22"
+                       VerticalAlignment="Center" Margin="16,0" />
+            <Button Content="Cerrar sesión" HorizontalAlignment="Right" Command="{Binding CerrarSesionCommand}" />
+        </Grid>
+
+        <ItemsControl ItemsSource="{Binding Comandas}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <!-- Cada comanda como una "tarjeta" — el equivalente digital del papel
+                         que ya salió impreso en la impresora térmica de esta estación. -->
+                    <Border Background="#FF2C2C2C" BorderBrush="#FFE67E22" BorderThickness="2"
+                            CornerRadius="6" Margin="10" Padding="12" MinWidth="260">
+                        <StackPanel>
+                            <TextBlock Text="{Binding MesaNombre, StringFormat='Mesa {0}'}"
+                                       Foreground="#FFE67E22" FontSize="20" FontWeight="Bold" />
+                            <TextBlock Text="{Binding HoraEnvio, StringFormat='Enviada: {0:HH:mm}'}"
+                                       Foreground="#FFBDC3C7" FontSize="12" Margin="0,0,0,8" />
+
+                            <ItemsControl ItemsSource="{Binding Items}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid Margin="0,4">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+                                            <StackPanel Grid.Column="0">
+                                                <TextBlock Foreground="White" FontSize="16"
+                                                           Text="{Binding Cantidad, StringFormat='{}{0}x'}"
+                                                           FontWeight="Bold" />
+                                                <TextBlock Foreground="White" FontSize="16" Text="{Binding NombreItem}" TextWrapping="Wrap" />
+                                                <TextBlock Foreground="#FFF1C40F" FontSize="13" Text="{Binding Notas}"
+                                                           Visibility="{Binding Notas, Converter={StaticResource NotasVisibilidadConverter}}" />
+                                            </StackPanel>
+                                            <Button Grid.Column="1" Content="Listo" MinHeight="48"
+                                                    Command="{Binding DataContext.MarcarListoCommand,
+                                                              RelativeSource={RelativeSource AncestorType=ItemsControl,
+                                                                               AncestorLevel=2}}"
+                                                    CommandParameter="{Binding}" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </DockPanel>
+</UserControl>

@@ -1,0 +1,17 @@
+## .NET
+bin/
+obj/
+*.user
+.vs/
+
+## Rider/VSCode
+.idea/
+.vscode/
+
+## SQLite local (no versionar datos reales del restaurante)
+*.db
+*.db-shm
+*.db-wal
+
+## Nuget local config usado solo para pruebas en sandbox (no aplica en Windows)
+NuGet.Config

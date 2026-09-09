@@ -1,0 +1,54 @@
+<UserControl x:Class="RestauranteApp.Client.Views.LoginView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!--
+        Login 100% táctil: dos teclados numéricos en pantalla (mesero y PIN), sin depender
+        de teclado físico. Pensado para un monitor touch en la estación del mesero.
+    -->
+    <Grid Background="#FF2C3E50">
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="460">
+            <TextBlock Text="Iniciar sesión" FontSize="32" Foreground="White"
+                       HorizontalAlignment="Center" Margin="0,0,0,24" FontWeight="Bold" />
+
+            <TextBlock Text="Número de mesero" Foreground="White" FontSize="16" />
+            <TextBox Text="{Binding NumeroMesero, Mode=OneWay}" IsReadOnly="True"
+                     FontSize="26" TextAlignment="Center" Margin="0,4,0,4" />
+            <UniformGrid Columns="5" Rows="2">
+                <Button Content="1" Command="{Binding AgregarDigitoMeseroCommand}" CommandParameter="1" />
+                <Button Content="2" Command="{Binding AgregarDigitoMeseroCommand}" CommandParameter="2" />
+                <Button Content="3" Command="{Binding AgregarDigitoMeseroCommand}" CommandParameter="3" />
+                <Button Content="4" Command="{Binding AgregarDigitoMeseroCommand}" CommandParameter="4" />
+                <Button Content="5" Command="{Binding AgregarDigitoMeseroCommand}" CommandParameter="5" />
+                <Button Content="6" Command="{Binding AgregarDigitoMeseroCommand}" CommandParameter="6" />
+                <Button Content="7" Command="{Binding AgregarDigitoMeseroCommand}" CommandParameter="7" />
+                <Button Content="8" Command="{Binding AgregarDigitoMeseroCommand}" CommandParameter="8" />
+                <Button Content="9" Command="{Binding AgregarDigitoMeseroCommand}" CommandParameter="9" />
+                <Button Content="0" Command="{Binding AgregarDigitoMeseroCommand}" CommandParameter="0" />
+            </UniformGrid>
+
+            <TextBlock Text="PIN" Foreground="White" FontSize="16" Margin="0,16,0,0" />
+            <TextBox Text="{Binding Pin, Mode=OneWay}" IsReadOnly="True"
+                     FontSize="26" TextAlignment="Center" Margin="0,4,0,4" />
+            <UniformGrid Columns="5" Rows="2">
+                <Button Content="1" Command="{Binding AgregarDigitoPinCommand}" CommandParameter="1" />
+                <Button Content="2" Command="{Binding AgregarDigitoPinCommand}" CommandParameter="2" />
+                <Button Content="3" Command="{Binding AgregarDigitoPinCommand}" CommandParameter="3" />
+                <Button Content="4" Command="{Binding AgregarDigitoPinCommand}" CommandParameter="4" />
+                <Button Content="5" Command="{Binding AgregarDigitoPinCommand}" CommandParameter="5" />
+                <Button Content="6" Command="{Binding AgregarDigitoPinCommand}" CommandParameter="6" />
+                <Button Content="7" Command="{Binding AgregarDigitoPinCommand}" CommandParameter="7" />
+                <Button Content="8" Command="{Binding AgregarDigitoPinCommand}" CommandParameter="8" />
+                <Button Content="9" Command="{Binding AgregarDigitoPinCommand}" CommandParameter="9" />
+                <Button Content="0" Command="{Binding AgregarDigitoPinCommand}" CommandParameter="0" />
+            </UniformGrid>
+            <Button Content="Borrar último dígito del PIN" Command="{Binding BorrarPinCommand}" />
+
+            <TextBlock Text="{Binding MensajeError}" Foreground="#FFE74C3C" FontSize="14"
+                       TextWrapping="Wrap" Margin="0,8,0,0" HorizontalAlignment="Center" />
+
+            <Button Content="Ingresar" Command="{Binding IngresarCommand}"
+                    Background="#FF27AE60" Foreground="White" FontWeight="Bold"
+                    FontSize="22" MinHeight="72" Margin="0,16,0,0" />
+        </StackPanel>
+    </Grid>
+</UserControl>

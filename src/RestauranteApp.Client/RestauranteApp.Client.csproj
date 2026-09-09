@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <!-- net8.0-windows + UseWPF requiere el SDK de escritorio de Windows (Visual Studio con
+         la carga de trabajo ".NET desktop development"). Este proyecto solo puede compilarse
+         en la PC Windows donde se desarrolle/compile el cliente (no en Linux/macOS). -->
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>RestauranteApp.Client</RootNamespace>
+    <AssemblyName>RestauranteApp.Client</AssemblyName>
+
+    <!-- Terminal táctil: por defecto arranca maximizada y sin bordes para que el mesero
+         no pueda minimizar/cerrar por accidente con el dedo. Ajustable en MainWindow.xaml. -->
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="8.0.10" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RestauranteApp.Shared\RestauranteApp.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

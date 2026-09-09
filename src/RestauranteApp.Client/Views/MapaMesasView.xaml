@@ -1,0 +1,53 @@
+<UserControl x:Class="RestauranteApp.Client.Views.MapaMesasView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <UserControl.Resources>
+        <!-- Color de la mesa según su estado en vivo (viene de SignalR/REST); el diseño
+             final de colores/planos se personaliza después, esto solo marca el estado. -->
+        <Style x:Key="EstiloMesa" TargetType="Button">
+            <Setter Property="MinWidth" Value="140" />
+            <Setter Property="MinHeight" Value="120" />
+            <Setter Property="Margin" Value="10" />
+            <Setter Property="FontSize" Value="20" />
+        </Style>
+    </UserControl.Resources>
+
+    <DockPanel Background="#FFECF0F1">
+        <Grid DockPanel.Dock="Top" Background="#FF34495E" Height="70">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" Text="{Binding NombreMesero, StringFormat='Mesero: {0}'}"
+                       Foreground="White" FontSize="20" VerticalAlignment="Center" Margin="16,0" />
+            <Button Grid.Column="1" Content="Refrescar" Command="{Binding RefrescarCommand}" />
+            <Button Grid.Column="2" Content="Cerrar sesión" Command="{Binding CerrarSesionCommand}" />
+        </Grid>
+
+        <ItemsControl ItemsSource="{Binding Mesas}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Button Style="{StaticResource EstiloMesa}"
+                            Command="{Binding DataContext.SeleccionarMesaCommand,
+                                      RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                            CommandParameter="{Binding}">
+                        <Button.Background>
+                            <Binding Path="Estado" Converter="{StaticResource EstadoMesaColorConverter}" />
+                        </Button.Background>
+                        <StackPanel>
+                            <TextBlock Text="{Binding Nombre}" FontWeight="Bold" FontSize="24" HorizontalAlignment="Center" />
+                            <TextBlock Text="{Binding ZonaNombre}" FontSize="12" HorizontalAlignment="Center" />
+                            <TextBlock Text="{Binding Estado}" FontSize="14" HorizontalAlignment="Center" Margin="0,6,0,0" />
+                        </StackPanel>
+                    </Button>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </DockPanel>
+</UserControl>
